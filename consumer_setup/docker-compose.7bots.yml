@@ -33,7 +33,7 @@ services:
         required: false # default true
       - path: env/consumer.env
         required: false # default true
-      - path: env/producer_list_${NUM_OF_BOTS:-5}bots.env
+      - path: env/producer_list_${NUM_OF_BOTS:-7}bots.env
         required: false # default true
       - path: env/pairlists/pairlist-${PAIRLIST_MODE:-volume}-${EXCHANGE_NAME:-binance}-${PAIRLIST_CURRENCY:-${STAKE_CURRENCY:-USDT}}.env
         required: false # default true
