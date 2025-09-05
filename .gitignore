@@ -165,4 +165,6 @@ config*.json
 *.sqlite-shm
 *.sqlite-wal
 
+# Consumer setup
 !consumer_setup/*
+!consumer_setup/*/*
