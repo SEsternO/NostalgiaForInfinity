@@ -49,6 +49,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${CONSUMER_BOT_NAME:-Example_Test_Account}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${CONSUMER_BOT_NAME:-Example_Test_Account}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config user_data/config.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --config consumer_setup/configs/producer_list.json
       --strategy-path .
 
@@ -71,6 +72,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER1_BOT_NAME:-Producer_1}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER1_BOT_NAME:-Producer_1}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer1.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer2:
@@ -92,6 +94,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER2_BOT_NAME:-Producer_2}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER2_BOT_NAME:-Producer_2}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer2.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer3:
@@ -113,6 +116,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER3_BOT_NAME:-Producer_3}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER3_BOT_NAME:-Producer_3}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer3.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer4:
@@ -134,6 +138,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER4_BOT_NAME:-Producer_4}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER4_BOT_NAME:-Producer_4}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer4.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer5:
@@ -155,6 +160,7 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER5_BOT_NAME:-Producer_5}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER5_BOT_NAME:-Producer_5}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer5.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer6:
@@ -176,4 +182,5 @@ services:
       --db-url sqlite:////freqtrade/user_data/${PRODUCER6_BOT_NAME:-Producer_6}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
       --log-file user_data/logs/${PRODUCER6_BOT_NAME:-Producer_6}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer6.json
+      --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
