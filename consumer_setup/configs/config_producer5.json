@@ -10,7 +10,7 @@
   "strategy": "NostalgiaForInfinityX6",
   "add_config_files": [
     "../../configs/trading_mode-spot.json",
-    "producers/binance/airlist-volume-binance-usdt-producer5.json",
+    "producers/binance/pairlist-volume-binance-usdt-producer5.json",
     "../../configs/blacklist-binance.json",
     "../../configs/exampleconfig.json",
     "producers/exampleconfig_secret_producer5.json"
