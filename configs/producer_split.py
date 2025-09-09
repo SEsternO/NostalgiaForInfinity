@@ -244,7 +244,7 @@ def main():
   if args.number_assets < args.number_producers:
     print("Warning: number_assets is less than number_producers, some copies may have 0 assets")
 
-  env_output_directory = f"{args.directory}/../consumer_setup/env"
+  env_output_directory = f"{args.directory}/../consumer_setup/env/pairlists"
   # Process files
   convert_pairlist_files(args.directory, env_output_directory, args.number_producers)
   process_pairlist_files(args.directory, args.number_assets, args.number_producers)
