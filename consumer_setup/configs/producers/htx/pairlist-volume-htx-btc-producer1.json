@@ -35,8 +35,8 @@
     },
     {
       "method": "OffsetFilter",
-      "offset": 10,
-      "number_assets": 10
+      "offset": 40,
+      "number_assets": 40
     }
   ]
 }
