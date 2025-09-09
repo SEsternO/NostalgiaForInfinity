@@ -519,6 +519,7 @@ class NostalgiaForInfinityX6(IStrategy):
     "FIL",
     "GRT",
     "HBAR",
+    "HYPE",
     "ICP",
     "KAS",
     "LINK",
@@ -560,6 +561,7 @@ class NostalgiaForInfinityX6(IStrategy):
     "FIL",
     "GRT",
     "HBAR",
+    "HYPE"
     "ICP",
     "IMX",
     "INJ",
