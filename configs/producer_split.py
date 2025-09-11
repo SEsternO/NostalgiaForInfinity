@@ -21,7 +21,7 @@ def convert_pairlist_files(input_dir, output_dir, number_of_copies):
     # Create output directory if it doesn't exist
     
     full_dir = output_dir + "/producers"
-    os.makedirs(full_dir, exist_ok=True)
+    # os.makedirs(full_dir, exist_ok=True)
     
     # Find all JSON files starting with 'pairlist-volume-'
     pattern = os.path.join(input_dir, 'pairlist-volume-*.json')
@@ -127,7 +127,7 @@ def process_pairlist_files(directory, new_number_assets, number_of_copies):
   Process all JSON files starting with 'pairlist-volume-' in the specified directory.
   """
 
-  os.makedirs(directory+"/producers", exist_ok=True)
+  # os.makedirs(directory+"/producers", exist_ok=True)
 
   # Find all matching files
   pattern = os.path.join(directory, "pairlist-volume-*.json")
