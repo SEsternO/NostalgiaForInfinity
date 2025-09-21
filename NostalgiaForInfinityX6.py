@@ -69,7 +69,7 @@ class NostalgiaForInfinityX6(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v16.7.126"
+    return "v16.7.129"
 
   stoploss = -0.99
 
@@ -7610,8 +7610,20 @@ class NostalgiaForInfinityX6(IStrategy):
 
     # Global protections Short
     df["protections_short_global"] = (
-      # 5m & 15m up move, 15m & 1h & 4h still low, 15m & 1h low, 4h still low
+      # 5m & 15m & 1h & 4h up move, 15m & 1h & 4h still not high enough, 4h still low, 1h uptrend
       (
+        (df["RSI_3"] < 90.0)
+        | (df["RSI_3_15m"] < 75.0)
+        | (df["RSI_3_1h"] < 75.0)
+        | (df["RSI_3_4h"] < 75.0)
+        | (df["RSI_14_15m"] > 90.0)
+        | (df["RSI_14_1h"] > 85.0)
+        | (df["RSI_14_4h"] > 70.0)
+        | (df["STOCHRSIk_14_14_3_3_4h"] > 60.0)
+        | (df["ROC_9_1h"] < 15.0)
+      )
+      # 5m & 15m up move, 15m & 1h & 4h still low, 15m & 1h low, 4h still low
+      & (
         (df["RSI_3"] < 90.0)
         | (df["RSI_3_15m"] < 75.0)
         | (df["RSI_14_15m"] > 60.0)
@@ -14582,6 +14594,8 @@ class NostalgiaForInfinityX6(IStrategy):
           )
           # 15m & 1h up move, 4h low
           short_entry_logic.append((df["RSI_3"] < 90.0) | (df["RSI_3_1h"] < 80.0) | (df["AROONU_14_4h"] > 20.0))
+          # 5m up move, 15m & 1h uptrend
+          short_entry_logic.append((df["RSI_3"] < 90.0) | (df["CMF_20_15m"] < 0.30) | (df["CMF_20_1h"] < 0.30))
           # 5m up move, 15m stil low
           short_entry_logic.append((df["RSI_3"] < 90.0) | (df["AROONU_14_15m"] > 50.0))
           # 5m up move, 15m & 1h still not high enough
@@ -14759,6 +14773,10 @@ class NostalgiaForInfinityX6(IStrategy):
           # 1d up move, 1h & 4h still not low enough
           short_entry_logic.append(
             (df["RSI_3_1d"] < 90.0) | (df["STOCHRSIk_14_14_3_3_1h"] > 80.0) | (df["STOCHRSIk_14_14_3_3_4h"] > 50.0)
+          )
+          # 15m & 1h uptrend, 4h still low
+          short_entry_logic.append(
+            (df["CMF_20_15m"] < 0.30) | (df["CMF_20_1h"] < 0.30) | (df["STOCHRSIk_14_14_3_3_4h"] > 60.0)
           )
           # 5m green, 15m still not high enough
           short_entry_logic.append((df["change_pct"] < 5.0) | (df["AROOND_14_15m"] < 50.0))
