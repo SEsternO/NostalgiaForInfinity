@@ -69,7 +69,7 @@ class NostalgiaForInfinityX6(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v16.8.135"
+    return "v16.8.137"
 
   stoploss = -0.99
 
@@ -392,9 +392,9 @@ class NostalgiaForInfinityX6(IStrategy):
   grinding_v2_derisk_global_futures = -0.30
 
   grinding_v2_grind_1_enable = True
-  grinding_v2_grind_1_stakes_spot = [0.10, 0.15, 0.20, 0.25, 0.30]
+  grinding_v2_grind_1_stakes_spot = [0.20, 0.22, 0.24, 0.26, 0.28]
   grinding_v2_grind_1_thresholds_spot = [-0.06, -0.07, -0.08, -0.09, -0.10]
-  grinding_v2_grind_1_stakes_futures = [0.10, 0.15, 0.20, 0.25, 0.30]
+  grinding_v2_grind_1_stakes_futures = [0.20, 0.22, 0.24, 0.26, 0.28]
   grinding_v2_grind_1_thresholds_futures = [-0.06, -0.07, -0.08, -0.09, -0.10]
   grinding_v2_grind_1_profit_threshold_spot = 0.02
   grinding_v2_grind_1_profit_threshold_futures = 0.02
@@ -403,9 +403,9 @@ class NostalgiaForInfinityX6(IStrategy):
   grinding_v2_grind_1_derisk_futures = -0.26
 
   grinding_v2_grind_2_enable = True
-  grinding_v2_grind_2_stakes_spot = [0.05, 0.10, 0.15, 0.20, 0.25]
+  grinding_v2_grind_2_stakes_spot = [0.10, 0.12, 0.14, 0.16, 0.18]
   grinding_v2_grind_2_thresholds_spot = [-0.06, -0.07, -0.08, -0.09, -0.10]
-  grinding_v2_grind_2_stakes_futures = [0.05, 0.10, 0.15, 0.20, 0.25]
+  grinding_v2_grind_2_stakes_futures = [0.10, 0.12, 0.14, 0.16, 0.18]
   grinding_v2_grind_2_thresholds_futures = [-0.06, -0.07, -0.08, -0.09, -0.10]
   grinding_v2_grind_2_profit_threshold_spot = 0.02
   grinding_v2_grind_2_profit_threshold_futures = 0.02
@@ -414,9 +414,9 @@ class NostalgiaForInfinityX6(IStrategy):
   grinding_v2_grind_2_derisk_futures = -0.26
 
   grinding_v2_grind_3_enable = True
-  grinding_v2_grind_3_stakes_spot = [0.05, 0.10, 0.15, 0.20, 0.25]
+  grinding_v2_grind_3_stakes_spot = [0.10, 0.12, 0.14, 0.16, 0.18]
   grinding_v2_grind_3_thresholds_spot = [-0.06, -0.07, -0.08, -0.09, -0.10]
-  grinding_v2_grind_3_stakes_futures = [0.05, 0.10, 0.15, 0.20, 0.25]
+  grinding_v2_grind_3_stakes_futures = [0.10, 0.12, 0.14, 0.16, 0.18]
   grinding_v2_grind_3_thresholds_futures = [-0.06, -0.07, -0.08, -0.09, -0.10]
   grinding_v2_grind_3_profit_threshold_spot = 0.02
   grinding_v2_grind_3_profit_threshold_futures = 0.02
@@ -6438,6 +6438,15 @@ class NostalgiaForInfinityX6(IStrategy):
         | (df["ROC_9_1h"] < 20.0)
         | (df["ROC_9_4h"] < 50.0)
         | (df["ROC_9_1d"] < 250.0)
+      )
+      # 15m & 4h down move, 15m & 1h high, 4h downtrend
+      & (
+        (df["RSI_3_15m"] > 25.0)
+        | (df["RSI_3_4h"] > 10.0)
+        | (df["AROONU_14_15m"] < 70.0)
+        | (df["STOCHRSIk_14_14_3_3_15m"] < 40.0)
+        | (df["STOCHRSIk_14_14_3_3_1h"] < 80.0)
+        | (df["ROC_9_4h"] > -30.0)
       )
       # 15m & 4h & 1d down move, 15m still high, 1h & 4h downtrend
       & (
