@@ -167,4 +167,4 @@ config*.json
 
 # Consumer setup
 !consumer_setup/*
-!consumer_setup/*/*
+consumer_setup/.env

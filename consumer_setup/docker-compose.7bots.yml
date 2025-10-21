@@ -12,7 +12,7 @@ x-common-settings:
     - "../user_data/data:/freqtrade/user_data/data"
     - "../configs:/freqtrade/configs"
     - "../consumer_setup:/freqtrade/consumer_setup"
-    - "../${STRATEGY:-NostalgiaForInfinityX6}.py:/freqtrade/${STRATEGY:-NostalgiaForInfinityX6}.py"
+    - "../${STRATEGY:-NostalgiaForInfinityX7}.py:/freqtrade/${STRATEGY:-NostalgiaForInfinityX7}.py"
   # healthcheck:
   #   test: ["CMD", "curl", "-f", "http://localhost:${API_SERVER__LISTEN_PORT:-8080}"]
   #   interval: 1m30s
@@ -25,7 +25,7 @@ services:
 
   freqtrade-consumer:
     <<: *common-settings
-    container_name: ${CONSUMER_BOT_NAME:-Example_Test_Account}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${CONSUMER_BOT_NAME:-Example_Test_Account}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${CONSUMER_LISTEN_PORT:-8989}:${CONSUMER_LISTEN_PORT:-8989}"
     env_file:
@@ -47,7 +47,7 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${CONSUMER_BOT_NAME:-Example_Test_Account}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${CONSUMER_BOT_NAME:-Example_Test_Account}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${CONSUMER_BOT_NAME:-Example_Test_Account}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config user_data/config.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --config consumer_setup/configs/producer_list.json
@@ -55,7 +55,7 @@ services:
 
   freqtrade-producer1:
     <<: *common-settings
-    container_name: ${PRODUCER1_BOT_NAME:-Producer_1}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER1_BOT_NAME:-Producer_1}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER1_LISTEN_PORT:-8981}:${PRODUCER1_LISTEN_PORT:-8981}"
     env_file:
@@ -70,14 +70,14 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER1_BOT_NAME:-Producer_1}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER1_BOT_NAME:-Producer_1}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER1_BOT_NAME:-Producer_1}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer1.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer2:
     <<: *common-settings
-    container_name: ${PRODUCER2_BOT_NAME:-Producer_2}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER2_BOT_NAME:-Producer_2}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER2_LISTEN_PORT:-8982}:${PRODUCER2_LISTEN_PORT:-8982}"
     env_file:
@@ -92,14 +92,14 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER2_BOT_NAME:-Producer_2}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER2_BOT_NAME:-Producer_2}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER2_BOT_NAME:-Producer_2}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer2.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer3:
     <<: *common-settings
-    container_name: ${PRODUCER3_BOT_NAME:-Producer_3}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER3_BOT_NAME:-Producer_3}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER3_LISTEN_PORT:-8983}:${PRODUCER3_LISTEN_PORT:-8983}"
     env_file:
@@ -114,14 +114,14 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER3_BOT_NAME:-Producer_3}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER3_BOT_NAME:-Producer_3}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER3_BOT_NAME:-Producer_3}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer3.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer4:
     <<: *common-settings
-    container_name: ${PRODUCER4_BOT_NAME:-Producer_4}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER4_BOT_NAME:-Producer_4}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER4_LISTEN_PORT:-8984}:${PRODUCER4_LISTEN_PORT:-8984}"
     env_file:
@@ -136,14 +136,14 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER4_BOT_NAME:-Producer_4}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER4_BOT_NAME:-Producer_4}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER4_BOT_NAME:-Producer_4}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer4.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer5:
     <<: *common-settings
-    container_name: ${PRODUCER5_BOT_NAME:-Producer_5}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER5_BOT_NAME:-Producer_5}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER5_LISTEN_PORT:-8985}:${PRODUCER5_LISTEN_PORT:-8985}"
     env_file:
@@ -158,14 +158,14 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER5_BOT_NAME:-Producer_5}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER5_BOT_NAME:-Producer_5}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER5_BOT_NAME:-Producer_5}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer5.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
 
   freqtrade-producer6:
     <<: *common-settings
-    container_name: ${PRODUCER6_BOT_NAME:-Producer_6}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX6}
+    container_name: ${PRODUCER6_BOT_NAME:-Producer_6}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-${STRATEGY:-NostalgiaForInfinityX7}
     ports:
       - "${PRODUCER6_LISTEN_PORT:-8986}:${PRODUCER6_LISTEN_PORT:-8986}"
     env_file:
@@ -180,7 +180,7 @@ services:
     command: >
       trade
       --db-url sqlite:////freqtrade/user_data/${PRODUCER6_BOT_NAME:-Producer_6}_${EXCHANGE_NAME:-binance}_${TRADING_MODE:-spot}-tradesv3.sqlite
-      --log-file user_data/logs/${PRODUCER6_BOT_NAME:-Producer_6}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX6}-${TRADING_MODE:-spot}.log
+      --log-file user_data/logs/${PRODUCER6_BOT_NAME:-Producer_6}-${EXCHANGE_NAME:-binance}-${STRATEGY:-NostalgiaForInfinityX7}-${TRADING_MODE:-spot}.log
       --config consumer_setup/configs/config_producer6.json
       --config configs/blacklist-${EXCHANGE_NAME}.json
       --strategy-path .
