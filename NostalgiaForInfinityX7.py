@@ -69,7 +69,7 @@ class NostalgiaForInfinityX7(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v17.0.4"
+    return "v17.0.5"
 
   stoploss = -0.99
 
@@ -1028,7 +1028,7 @@ class NostalgiaForInfinityX7(IStrategy):
       if not is_derisk:
         is_derisk = trade.amount < (filled_entries[0].safe_filled * 0.95)
     if previous_sell_reason in [f"exit_{mode_name}_stoploss_doom", f"exit_{mode_name}_stoploss"]:
-      # return right away for system v2
+      # return right away for system v3
       if is_system_v3:
         return True, previous_sell_reason
 
@@ -4434,6 +4434,17 @@ class NostalgiaForInfinityX7(IStrategy):
         | (df["RSI_14_4h"] < 40.0)
         | (df["CMF_20_15m"] > -0.40)
         | (df["AROONU_14_1h"] < 50.0)
+      )
+      # 15m & 4h down move, 15m & 1h still not low enough, 4h still high, 1h & 4h still not low enough, 1d overbought
+      & (
+        (df["RSI_3_15m"] > 5.0)
+        | (df["RSI_3_4h"] > 20.0)
+        | (df["RSI_14_15m"] < 10.0)
+        | (df["RSI_14_1h"] < 30.0)
+        | (df["RSI_14_4h"] < 40.0)
+        | (df["AROONU_14_1h"] < 20.0)
+        | (df["AROONU_14_4h"] < 20.0)
+        | (df["ROC_9_1d"] < 20.0)
       )
       # 15m down move, 15m still not low enough, 1h & 4h high, 1h overbought
       & (
@@ -9386,7 +9397,7 @@ class NostalgiaForInfinityX7(IStrategy):
         | (df["STOCHRSIk_14_14_3_3_1h"] < 50.0)
         | (df["ROC_9_4h"] > -35.0)
       )
-      # 1d P^D, 15m & 4h down move, 15m & 4h still high
+      # 1d P&D, 15m & 4h down move, 15m & 4h still high
       & (
         (df["change_pct_1d"] > -20.0)
         | (df["change_pct_1d"].shift(288) < 20.0)
