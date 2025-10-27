@@ -69,7 +69,7 @@ class NostalgiaForInfinityX7(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v17.1.2"
+    return "v17.1.5"
 
   stoploss = -0.99
 
@@ -5885,6 +5885,17 @@ class NostalgiaForInfinityX7(IStrategy):
         | (df["STOCHRSIk_14_14_3_3_4h"] < 40.0)
         | (df["ROC_9_1d"] > -25.0)
       )
+      # 15m down move, 15m still not low enough, 1h & 4h still high, 15m still high, 1h high
+      & (
+        (df["RSI_3_15m"] > 15.0)
+        | (df["RSI_14_15m"] < 30.0)
+        | (df["RSI_14_1h"] < 50.0)
+        | (df["RSI_14_4h"] < 50.0)
+        | (df["AROONU_14_15m"] < 50.0)
+        | (df["AROONU_14_1h"] < 85.0)
+        | (df["STOCHRSIk_14_14_3_3_15m"] < 30.0)
+        | (df["STOCHRSIk_14_14_3_3_1h"] < 80.0)
+      )
       # 15m & 1h & 4h down move, 15m & 1h & 4h still not low enough, 1h downtrend, 15m & 4h still not low, 1h high
       & (
         (df["RSI_3_15m"] > 20.0)
@@ -9497,6 +9508,18 @@ class NostalgiaForInfinityX7(IStrategy):
         | (df["RSI_14_4h"] < 30.0)
         | (df["STOCHRSIk_14_14_3_3_4h"] < 40.0)
       )
+      # 1h & 4h down move, 1h & 4h still high, 1h still not low enough, 4h still high, 1h downtrend, 4h & 1d overbought
+      & (
+        (df["RSI_3_1h"] > 30.0)
+        | (df["RSI_3_4h"] > 50.0)
+        | (df["RSI_14_1h"] < 40.0)
+        | (df["RSI_14_4h"] < 40.0)
+        | (df["AROONU_14_1h"] < 25.0)
+        | (df["AROONU_14_4h"] < 50.0)
+        | (df["ROC_9_1h"] > -10.0)
+        | (df["ROC_9_4h"] < 20.0)
+        | (df["ROC_9_1d"] < 100.0)
+      )
       # 1h & 4h down move, 1h & 4h still high, 4h high, 1h & 4h overbought
       & (
         (df["RSI_3_1h"] > 30.0)
@@ -10812,6 +10835,17 @@ class NostalgiaForInfinityX7(IStrategy):
         | (df["RSI_3_4h"] < 85.0)
         | (df["STOCHRSIk_14_14_3_3_15m"] > 30.0)
         | (df["ROC_9_1h"] < 25.0)
+      )
+      # 15m & 1h & 4h up move, 15m & 1h & 4h uptrend, 15m still low, 1h uptrend
+      & (
+        (df["RSI_3_15m"] < 70.0)
+        | (df["RSI_3_1h"] < 70.0)
+        | (df["RSI_3_4h"] < 70.0)
+        | (df["CMF_20_15m"] < 0.20)
+        | (df["CMF_20_1h"] < 0.20)
+        | (df["CMF_20_4h"] < 0.20)
+        | (df["STOCHRSIk_14_14_3_3_15m"] > 50.0)
+        | (df["ROC_9_1h"] < 50.0)
       )
       # 15m & 1h & 4h up move, 15m & 1h & 4h still not high enough, 4h uptrend
       & (
