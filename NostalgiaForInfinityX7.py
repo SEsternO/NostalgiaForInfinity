@@ -69,7 +69,7 @@ class NostalgiaForInfinityX7(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v17.1.110"
+    return "v17.1.113"
 
   stoploss = -0.99
 
@@ -13265,6 +13265,8 @@ class NostalgiaForInfinityX7(IStrategy):
             # 15m & 1h down move, 4h high
             & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_1h"] > 15.0) | (df["AROONU_14_4h"] < 70.0))
             # 15m & 1h down move, 1h high
+            & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_1h"] > 25.0) | (df["AROONU_14_1h"] < 80.0))
+            # 15m & 1h down move, 1h high
             & ((df["RSI_3_15m"] > 20.0) | (df["RSI_3_1h"] > 20.0) | (df["AROONU_14_1h"] < 70.0))
             # 15m down move, 4h high, 4h overbought
             & ((df["RSI_3_15m"] > 25.0) | (df["AROONU_14_4h"] < 60.0) | (df["ROC_9_4h"] < 50.0))
@@ -15447,6 +15449,8 @@ class NostalgiaForInfinityX7(IStrategy):
           long_entry_logic.append(
             # 15m & 1h down move, 4h still high
             ((df["RSI_3_15m"] > 3.0) | (df["RSI_3_1h"] > 3.0) | (df["RSI_14_4h"] < 40.0))
+            # 15m & 1h & 4h down move
+            & ((df["RSI_3_15m"] > 3.0) | (df["RSI_3_1h"] > 10.0) | (df["RSI_3_4h"] > 3.0))
             # 15m & 1h down move, 1h high
             & ((df["RSI_3_15m"] > 3.0) | (df["RSI_3_1h"] > 60.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 80.0))
             # 15m & 4h down move, 4h still high
@@ -20800,6 +20804,7 @@ class NostalgiaForInfinityX7(IStrategy):
   ) -> tuple:
     is_backtest = self.is_backtest_mode()
     is_system_v3 = self.is_system_v3(trade)
+    is_system_v3_1 = self.is_system_v3_1(trade)
     sell = False
     signal_name = None
 
@@ -20904,7 +20909,22 @@ class NostalgiaForInfinityX7(IStrategy):
       elif (0.09 >= profit_init_ratio > 0.005) and (last_candle["RSI_3"] > 99.0):
         sell, signal_name = True, f"exit_{self.long_rapid_mode_name}_rpd_10"
 
-      if is_system_v3:
+      if is_system_v3_1:
+        # Stoplosses
+        if self.stops_enable and (
+          profit_stake
+          < -(
+            filled_entries[0].cost
+            * (
+              self.system_v3_1_stop_threshold_rapid_futures
+              if self.is_futures_mode
+              else self.system_v3_1_stop_threshold_rapid_spot
+            )
+            / trade.leverage
+          )
+        ):
+          sell, signal_name = True, f"exit_{self.long_rapid_mode_name}_stoploss_doom"
+      elif is_system_v3:
         # Stoplosses
         if self.stops_enable and (
           profit_stake
@@ -46412,6 +46432,7 @@ class NostalgiaForInfinityX7(IStrategy):
   ) -> tuple:
     is_backtest = self.is_backtest_mode()
     is_system_v3 = self.is_system_v3(trade)
+    is_system_v3_1 = self.is_system_v3_1(trade)
     sell = False
     signal_name = None
 
@@ -46516,7 +46537,22 @@ class NostalgiaForInfinityX7(IStrategy):
       elif (0.09 >= profit_init_ratio > 0.005) and (last_candle["RSI_3"] < 1.0):
         sell, signal_name = True, f"exit_{self.short_rapid_mode_name}_rpd_10"
 
-      if is_system_v3:
+      if is_system_v3_1:
+        # Stoplosses
+        if self.stops_enable and (
+          profit_stake
+          < -(
+            filled_entries[0].cost
+            * (
+              self.system_v3_1_stop_threshold_rapid_futures
+              if self.is_futures_mode
+              else self.system_v3_1_stop_threshold_rapid_spot
+            )
+            / trade.leverage
+          )
+        ):
+          sell, signal_name = True, f"exit_{self.short_rapid_mode_name}_stoploss_doom"
+      elif is_system_v3:
         # Stoplosses
         if self.stops_enable and (
           profit_stake
