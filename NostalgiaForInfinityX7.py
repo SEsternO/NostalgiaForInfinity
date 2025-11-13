@@ -69,7 +69,7 @@ class NostalgiaForInfinityX7(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v17.1.208"
+    return "v17.1.212"
 
   stoploss = -0.99
 
@@ -12924,6 +12924,13 @@ class NostalgiaForInfinityX7(IStrategy):
               | (df["RSI_3_4h"] > 30.0)
               | (df["STOCHRSIk_14_14_3_3_15m"] < 60.0)
             )
+            # 15m & 1h & 4h down move, 4h high
+            & (
+              (df["RSI_3_15m"] > 25.0)
+              | (df["RSI_3_1h"] > 35.0)
+              | (df["RSI_3_4h"] > 60.0)
+              | (df["AROONU_14_4h"] < 75.0)
+            )
             # 15m ^ 1h down move, 15m still high, 1h & 4h high
             & (
               (df["RSI_3_15m"] > 25.0)
@@ -13132,6 +13139,14 @@ class NostalgiaForInfinityX7(IStrategy):
               | (df["AROONU_14_15m"] < 20.0)
               | (df["AROONU_14_1h"] < 80.0)
               | (df["STOCHRSIk_14_14_3_3_1h"] < 70.0)
+            )
+            # 15m & 4h down move, 15m still high, 1h & 4h high
+            & (
+              (df["RSI_3_15m"] > 30.0)
+              | (df["RSI_3_4h"] > 30.0)
+              | (df["AROONU_14_15m"] < 50.0)
+              | (df["AROONU_14_1h"] < 70.0)
+              | (df["AROONU_14_4h"] < 70.0)
             )
             # 15m & 4h down move, 4h overbought
             & ((df["RSI_3_15m"] > 30.0) | (df["RSI_3_4h"] > 60.0) | (df["ROC_9_4h"] < 100.0))
@@ -14255,6 +14270,10 @@ class NostalgiaForInfinityX7(IStrategy):
           # 15m down move, 15m & 1h still high
           long_entry_logic.append(
             (df["RSI_3_15m"] > 5.0) | (df["AROONU_14_15m"] < 50.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 40.0)
+          )
+          # 15m & 1h down move, 1h still high
+          long_entry_logic.append(
+            (df["RSI_3_15m"] > 10.0) | (df["RSI_3_1h"] > 15.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 40.0)
           )
           # 15m & 1h down move, 1h still high
           long_entry_logic.append(
@@ -17394,6 +17413,10 @@ class NostalgiaForInfinityX7(IStrategy):
           # 15m down move, 15m still high, 4h high
           long_entry_logic.append(
             (df["RSI_3_15m"] > 55.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 50.0) | (df["AROONU_14_4h"] < 85.0)
+          )
+          # 15m down move, 15m & 1h still high
+          long_entry_logic.append(
+            (df["RSI_3_15m"] > 55.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 50.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 50.0)
           )
           # 1h down move, 4h still high, 1d high
           long_entry_logic.append(
