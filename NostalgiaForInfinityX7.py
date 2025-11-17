@@ -69,7 +69,7 @@ class NostalgiaForInfinityX7(IStrategy):
   INTERFACE_VERSION = 3
 
   def version(self) -> str:
-    return "v17.1.260"
+    return "v17.1.267"
 
   stoploss = -0.99
 
@@ -12699,6 +12699,14 @@ class NostalgiaForInfinityX7(IStrategy):
               | (df["AROONU_14_1h"] < 70.0)
               | (df["STOCHRSIk_14_14_3_3_1h"] < 70.0)
             )
+            # 15m & 1h & 4h down move, 1h & 4h still high
+            & (
+              (df["RSI_3_15m"] > 3.0)
+              | (df["RSI_3_1h"] > 45.0)
+              | (df["RSI_3_4h"] > 50.0)
+              | (df["STOCHRSIk_14_14_3_3_1h"] < 40.0)
+              | (df["STOCHRSIk_14_14_3_3_4h"] < 50.0)
+            )
             # 15m & 1h down move, 15m still not low enough, 1h & 4h still high, 15m still not low enough, 1h high
             & (
               (df["RSI_3_15m"] > 10.0)
@@ -13323,6 +13331,14 @@ class NostalgiaForInfinityX7(IStrategy):
               | (df["RSI_14_4h"] < 30.0)
               | (df["STOCHRSIk_14_14_3_3_15m"] < 60.0)
             )
+            # 4h down move, 15m & 1h still high, 4h downtrend
+            & (
+              (df["RSI_3_4h"] > 20.0)
+              | (df["AROONU_14_15m"] < 50.0)
+              | (df["STOCHRSIk_14_14_3_3_15m"] < 50.0)
+              | (df["STOCHRSIk_14_14_3_3_1h"] < 50.0)
+              | (df["ROC_9_4h"] > -30.0)
+            )
             # 4h down move, 15m stil high, 1h high, 4h & 1d downtrend
             & (
               (df["RSI_3_4h"] > 20.0)
@@ -13394,6 +13410,8 @@ class NostalgiaForInfinityX7(IStrategy):
             & ((df["RSI_3_1h"] > 3.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 50.0))
             # 1h down move, 1h still high, 4h overbought
             & ((df["RSI_3_1h"] > 3.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 50.0) | (df["ROC_9_4h"] < 20.0))
+            # 1h down move, 4h high, 1h downtrend
+            & ((df["RSI_3_1h"] > 5.0) | (df["STOCHRSIk_14_14_3_3_4h"] < 70.0) | (df["CMF_20_1h"] > -0.40))
             # 1h & 4h down move, 1h still high
             & ((df["RSI_3_1h"] > 10.0) | (df["RSI_3_4h"] > 20.0) | (df["AROONU_14_1h"] < 50.0))
             # 1h down move, 4h high
@@ -15774,6 +15792,8 @@ class NostalgiaForInfinityX7(IStrategy):
             & ((df["RSI_3_15m"] > 5.0) | (df["RSI_3_1h"] > 10.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 20.0))
             # 15m & 1h down move, 4h still high
             & ((df["RSI_3_15m"] > 5.0) | (df["RSI_3_1h"] > 10.0) | (df["AROONU_14_4h"] < 40.0))
+            # 15m & 4h down move, 1d overbought
+            & ((df["RSI_3_15m"] > 5.0) | (df["RSI_3_4h"] > 10.0) | (df["ROC_9_1d"] < 20.0))
             # 15m & 4h down move, 4h still high
             & ((df["RSI_3_15m"] > 5.0) | (df["RSI_3_4h"] > 15.0) | (df["RSI_14_4h"] < 40.0))
             # 15m & 1h down move, 15m high
@@ -15784,6 +15804,8 @@ class NostalgiaForInfinityX7(IStrategy):
             & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_1h"] > 15.0) | (df["AROONU_14_1h"] < 40.0))
             # 15m & 1h down move, 4h high
             & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_1h"] > 15.0) | (df["AROONU_14_4h"] < 60.0))
+            # 15m & 4h down move, 15m still not low enough
+            & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_4h"] > 15.0) | (df["AROONU_14_15m"] < 20.0))
             # 15m & 4h down move, 4h downtrend
             & ((df["RSI_3_15m"] > 10.0) | (df["RSI_3_4h"] > 25.0) | (df["CMF_20_4h"] > -0.30))
             # 15m & 1h down move, 4h high
@@ -15842,6 +15864,8 @@ class NostalgiaForInfinityX7(IStrategy):
             & ((df["RSI_3_1h"] > 25.0) | (df["RSI_3_4h"] > 25.0) | (df["STOCHRSIk_14_14_3_3_1h"] < 20.0))
             # 1h & 4h down move, 1d overbought
             & ((df["RSI_3_1h"] > 25.0) | (df["RSI_3_4h"] > 25.0) | (df["ROC_9_1d"] < 50.0))
+            # 1h down move, 4h high, 4h downtrend
+            & ((df["RSI_3_1h"] > 25.0) | (df["AROONU_14_4h"] < 70.0) | (df["CMF_20_4h"] > -0.50))
             # 1h & 4h down move, 4h still high
             & ((df["RSI_3_1h"] > 30.0) | (df["RSI_3_4h"] > 30.0) | (df["STOCHRSIk_14_14_3_3_4h"] < 50.0))
             # 1h & dh down move, 4h high
@@ -17429,6 +17453,8 @@ class NostalgiaForInfinityX7(IStrategy):
             & ((df["RSI_3_4h"] > 5.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 50.0) | (df["AROONU_14_4h"] < 30.0))
             # 4h down move, 15m high
             & ((df["RSI_3_4h"] > 15.0) | (df["STOCHRSIk_14_14_3_3_15m"] < 70.0))
+            # 15m still high, 4h & 1d overbought
+            & ((df["STOCHRSIk_14_14_3_3_15m"] < 50.0) | (df["ROC_9_4h"] < 40.0) | (df["ROC_9_1d"] < 100.0))
           )
 
           # Logic
@@ -42344,7 +42370,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or ((is_derisk or is_derisk_calc) and grind_1_derisk_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -42495,7 +42521,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or ((is_derisk or is_derisk_calc) and grind_2_derisk_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -42637,7 +42663,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -42820,7 +42846,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_2_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -42960,7 +42986,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_3_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -43100,7 +43126,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_4_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -43240,7 +43266,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_5_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -43380,7 +43406,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_6_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -43526,7 +43552,7 @@ class NostalgiaForInfinityX7(IStrategy):
     ):
       if (
         (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit < -0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -67969,7 +67995,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or ((is_derisk or is_derisk_calc) and grind_1_derisk_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68120,7 +68146,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or ((is_derisk or is_derisk_calc) and grind_2_derisk_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68262,7 +68288,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_1_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68445,7 +68471,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_2_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68585,7 +68611,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_3_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68725,7 +68751,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_4_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -68865,7 +68891,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_5_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -69005,7 +69031,7 @@ class NostalgiaForInfinityX7(IStrategy):
           or (is_grind_mode and grind_6_sub_grind_count == 0)
         )
         and (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
@@ -69151,7 +69177,7 @@ class NostalgiaForInfinityX7(IStrategy):
     ):
       if (
         (current_time - timedelta(minutes=10) > filled_entries[-1].order_filled_utc)
-        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.02))
+        and ((current_time - timedelta(hours=24) > filled_orders[-1].order_filled_utc) or (slice_profit > 0.06))
         and (
           (num_open_grinds == 0)
           or (current_time - timedelta(hours=6) > filled_orders[-1].order_filled_utc)
